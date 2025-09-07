@@ -1,16 +1,11 @@
 from django.db import models
+
 class Student(models.Model):
     roll_number = models.IntegerField()
-    F_name = models.CharField(max_length=30)
-    L_name = models.CharField(max_length = 30)
-    Address = models.CharField(max_length =50)
-    MO_no = models.IntegerField()
-
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    address = models.CharField(max_length=50, blank=True, null=True)
+    mobile_number = models.CharField(max_length=15)
+    photo = models.ImageField(upload_to='student_photos/', null=True, blank=True)  # <-- yaha add
     def __str__(self):
-        return self.F_name
-
-
-
-
-
-# Create your models here.
+        return f"{self.first_name} {self.last_name}"

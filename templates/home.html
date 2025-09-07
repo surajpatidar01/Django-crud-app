@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+  <h1>Welcome Django App </h1>
+  <p class="lead">This is  homepage.</p>
+
+  {% if user.is_authenticated %}
+    <p>Hello, <strong>{{ user.username }}</strong> 👋</p>
+    <a href="{% url 'student_list' %}" class="btn btn-primary">Go to Student List</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+    <a href="{% url 'signup' %}" class="btn btn-warning">Sign Up</a>
+  {% endif %}
+</div>
+{% endblock %}

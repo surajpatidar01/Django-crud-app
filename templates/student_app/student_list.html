@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Students</h2>
+    <a href="{% url 'add_student' %}" class="btn btn-success mb-3">Add Student</a>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Roll Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>Mobile Number</th>
+                    <th>Photo</th>  <!-- Photo column added -->
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for student in students %}
+                <tr>
+                    <td class="text-center">{{ student.roll_number }}</td>
+                    <td>{{ student.first_name }}</td>
+                    <td>{{ student.last_name }}</td>
+                    <td>{{ student.address }}</td>
+                    <td class="text-center">{{ student.mobile_number }}</td>
+                    <td class="text-center">
+                        {% if student.photo %}
+                            <img src="{{ student.photo.url }}" width="100">
+                        {% else %}
+                            No photo
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'student_edit' student.id %}" class="btn btn-primary btn-sm me-1">Edit</a>
+                        <a href="{% url 'student_delete' student.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No students found.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Extra CSS for stronger borders -->
+<style>
+    table, th, td {
+        border: 1px solid #000 !important;
+    }
+    th, td {
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+{% endblock %}
